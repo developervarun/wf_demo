@@ -1,0 +1,200 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: 'Arial';
+    text-decoration: none;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+/* Left menu fixed */
+.sideBarMenu {
+    width: 50px;
+    background: #ffffff;
+    color: #000000;
+    left: 0;
+    top: 60px;
+    padding-top: 20px;
+    height: calc(100vh - 80px);
+    border-right: 1px solid #ddd;
+    float: left;
+    position: fixed;
+    overflow: hidden;
+}
+
+.expand .sideBarMenu {
+    width: 300px;
+    overflow: auto;
+}
+
+.sideBarMenu ul li a {
+    padding: 17px;
+    display: block;
+    color: #ffffff;
+}
+
+.sideBarMenu ul li a:hover {
+    background: #ababab;
+}
+
+.sideBarMenu ul li a:hover i {
+    color: #ffffff;
+}
+
+.sideBarMenu ul li a.active {
+    background: #ababab;
+}
+
+.sideBarMenu ul li a.active i {
+    color: #ffffff;
+}
+
+.sideBarMenu ul li a i {
+    font-size: 20px;
+    color: #777777;
+}
+
+.leftMenu_Fixed.activeme {
+    width: 200px;
+    text-align: left;
+}
+
+.bodyRight_Panel {
+    margin-left: 60px;
+}
+
+/* Top menu fixed */
+.topMenu {
+    top: 0;
+    left: 0;
+    height: 60px;
+    box-shadow: 0 0 5px #ddd;
+    width: 100%;
+    position: fixed;
+    background: #fff;
+}
+
+.hamburger_Icon {
+    float: left;
+    width: 32px;
+    background: #ffffff;
+    height: 24px;
+    color: #ababab;
+    padding: 18px 14px;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.topMenuNav {
+    padding: 12px;
+}
+
+.topMenuNav img {
+    height: 30px;
+    float: left;
+}
+
+.topMenuNav span.partnerHome {
+    float: left;
+    margin: 10px 0;
+    font-size: 12px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Top menu list styling */
+.topmenuList ul li {
+    display: inline-flex;
+}
+
+.topmenuList ul li a {
+    padding: 6px;
+    display: block;
+    color: #666666;
+    margin-left: 20px;
+}
+
+.topmenuList ul li a:hover i {
+    color: #000;
+}
+
+.topmenuList ul li a i {
+    font-size: 20px;
+}
+
+.mainContent {
+    padding: 70px 0 0 10px;
+    width: calc(100% - 60px);
+    float: right;
+}
+
+.expand .mainContent {
+    width: calc(100% - 310px);
+}
+
+.sideBarMenu .itemLabel, .sideBarMenu .itemArrow {
+    visibility: hidden;
+}
+
+.expand .itemLabel, .expand .itemArrow {
+    visibility: visible;
+    font-size: 13px;
+}
+
+.fa {
+    margin: 0 10px 0 0;
+}
+
+span.indent {
+    width: 20px;
+    height: 15px;
+}
+.manageUser {
+    position: absolute;
+    width: 150px;
+    right: 80px;
+    top: 40px;
+    box-shadow: 0 0 5px #ddd;
+    background: #fff;
+    font-size: 13px;
+    text-align: left;
+}
+.manageUser li {
+    width: 100%;
+}
+.sideBarMenu li > div:hover, .manageUser li:hover{
+    background: #ababab;
+}
+.manageUser {
+    display: none
+}
+.topmenuList li:hover .manageUser {
+    display: block;
+}
