@@ -1,43 +1,39 @@
-import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import EnzymeAdapter from 'enzyme-adapter-react-16';
-import { findByTestAttr, checkProps } from '../test/testUtils';
+import {act} from "react-dom/test-utils";
+import React from "react";
+import Enzyme, {mount, shallow} from "enzyme";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { findByTestAttr } from '../test/testUtils';
 import Leftpane from './Leftpane';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+import Container from "./Container";
 
-Enzyme.configure({ adapter: new EnzymeAdapter() });
+Enzyme.configure({adapter: new Adapter()});
 
-const setup = () => {
-    return shallow(<Leftpane />)
-}
+describe("Leftpane Component tests...", () => {
+    let wrapper, navList;
 
-const url = '../../navigation.json';
-const getNavList = (config) => {
-    const { successCB } = config;
-    return axios.get(url)  // returns Promise
-        .then(response => {
-            successCB(response.data, config);
-        });
-}
-test('check if leftpane component renders without error', () => {
-    const wrapper = setup();
-    const component = findByTestAttr(wrapper, "component_leftpane");
-    expect(component.length).toBe(1);
-});
+    const setup = () => {
+        return mount(<Leftpane />);
+    }
 
-describe('test if api is working', () => {
-    test('call mock api and test if it is responding', ()=>{
-        const wrapper = setup();
-        const mock = new MockAdapter(axios);
-        const successCB = jest.fn();
+    beforeEach(() => {
+        const mockResponseData = [{"title": "Orders","url": "/orders","children": []}];
+        jest.clearAllMocks();
 
-        mock.onGet(url).reply(200, 'success');
-        const axiosSpy = jest.spyOn(axios, 'get');
+        global.fetch = jest.fn(async () => ({
+            json: async () => mockResponseData
+        }));
+        wrapper = setup();
+    });
 
-        return getNavList({ successCB }).then(() => {
-            expect(axiosSpy).toHaveBeenCalled();
-            expect(successCB.mock.calls[0][0]).toBe('success');
-        });
+    test('check if leftpane component renders without error', () => {
+        const component = findByTestAttr(wrapper, "component_leftpane");
+        expect(component.length).toBe(1);
+    });
+
+    test("check if render() is called and dom is updated", async () => {
+        await act(() => new Promise(setImmediate));
+        wrapper.update();
+        const listUL = wrapper.find("ul");
+        expect(listUL.exists()).toBeTruthy();
     });
 });

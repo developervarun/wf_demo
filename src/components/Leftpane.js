@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import { UL, LI, Item, Label, Arrow } from "../utils/stylesUtil";
 import { handleArrowClick, handleMenuClick } from "../utils/eventUtils";
+import { API } from '../utils/apiUtils';
 
 /*
  *@Leftpane
@@ -15,18 +15,13 @@ const Leftpane = () => {
         getNavigationItems();
     }, []);
 
-    const getNavigationItems = async () => {
-        await axios.get('../../navigation.json')
-            .then(function (response) {
-                setNavigationList(response.data);
-            })
-            .catch(function (error) {
-                console.warn(error);
-            });
+    const getNavigationItems = () => {
+        API.getData('../../navigation.json')
+            .then(result => setNavigationList(result.data));
     }
 
     const ListMenu = ({ depth, data, hasSubMenu, menuName, menuIndex }) => (
-        <LI>
+        <LI data-test="list_item">
             <Item depth={depth}>
                 { depth == 1 ? <i className="fa fa-file-text-o"></i> : <span className="indent"></span> }
                 <Label
@@ -36,7 +31,6 @@ const Leftpane = () => {
                 {hasSubMenu && (
                     <Arrow
                         className="itemArrow"
-                        data-test="expand-menu"
                         onClick={() => {
                                 let newActiveMenus = handleArrowClick(menuName, activeMenus);
                                 setActiveMenus(newActiveMenus);
